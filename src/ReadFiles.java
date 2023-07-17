@@ -4,27 +4,14 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class ReadFiles {
-    private static File[] monthsReports;
-    private static File[] yearReports;
-    private final static File PATH = new File("src\\files");
-    static void readFiles() {
-        var logger = Logger.getLogger("Работа с файлами");
-        try {
-            monthsReports = PATH.listFiles(new FileFilter("\\bm\\d{6}.(txt|csv)"));
-            yearReports = PATH.listFiles(new FileFilter("\\by\\d{4}.(txt|csv)"));
-            assert monthsReports != null;
-            if (monthsReports.length == 0) {
-                throw new FindMonthsReportException();
-            }
-            assert yearReports != null;
-            if (yearReports.length == 0) {
-                throw new FindYearReportException();
-            }
-        } catch (SecurityException e) {
-            logger.log(Level.INFO, "Ошибка открытия файлов (отсутствует доступ)");
-        } catch (FindMonthsReportException | FindYearReportException e) {
-            logger.log(Level.WARNING, e.getMessage() + " отчеты отсутствуют");
-        }
+    static File[] getMonthsReports() {
+        ReadFiles.readFiles();
+        return monthsReports;
+    }
+
+    static File[] getYearReports() {
+        ReadFiles.readFiles();
+        return yearReports;
     }
 
     static class FileFilter implements FilenameFilter {
@@ -52,13 +39,27 @@ public class ReadFiles {
         }
     }
 
-    public static File[] getMonthsReports() {
-        ReadFiles.readFiles();
-        return monthsReports;
-    }
+    private static File[] monthsReports;
+    private static File[] yearReports;
+    private final static File PATH = new File("src\\files");
 
-    public static File[] getYearReports() {
-        ReadFiles.readFiles();
-        return yearReports;
+    static void readFiles() {
+        Logger logger = Logger.getLogger("Работа с файлами");
+        try {
+            monthsReports = PATH.listFiles(new FileFilter("\\bm\\d{6}.(txt|csv)"));
+            yearReports = PATH.listFiles(new FileFilter("\\by\\d{4}.(txt|csv)"));
+            assert monthsReports != null;
+            if (monthsReports.length == 0) {
+                throw new FindMonthsReportException();
+            }
+            assert yearReports != null;
+            if (yearReports.length == 0) {
+                throw new FindYearReportException();
+            }
+        } catch (SecurityException e) {
+            logger.log(Level.INFO, "Ошибка открытия файлов (отсутствует доступ)");
+        } catch (FindMonthsReportException | FindYearReportException e) {
+            logger.log(Level.WARNING, e.getMessage() + " отчеты отсутствуют");
+        }
     }
 }

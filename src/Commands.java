@@ -1,5 +1,9 @@
 public class Commands {
-    private final static String commands = """
+    static void printCommands() {
+        System.out.println(COMMANDS);
+    }
+
+    private static final String COMMANDS = """
             \n
             \t\t1. Считать месячные отчеты
             \t\t2. Считать годовые отчеты
@@ -8,7 +12,4 @@ public class Commands {
             \t\t5. Вывести информацию о годовом отчете
             \t\t6. Выход из программы
             """;
-    static void printCommands () {
-        System.out.println(commands);
-    }
 }

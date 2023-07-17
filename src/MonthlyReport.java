@@ -2,13 +2,14 @@ import java.io.File;
 import java.util.List;
 
 public class MonthlyReport extends Report {
-    public MonthlyReport() {
+    MonthlyReport() {
         super(ReadFiles.getMonthsReports());
         super.getReport();
     }
+
     @Override
     void processReport(List<String> report, File reportFile) {
-        var message = new StringBuilder();
+        StringBuilder message = new StringBuilder();
         message.
                 append("\t\t").
                 append(reportFile.getName(), 1, 5).
@@ -19,7 +20,9 @@ public class MonthlyReport extends Report {
         double maxIncome = 0.0;
         double maxOutcome = 0.0;
         for (int i = 0; i < report.size(); i++) {
-            if (i == 0) continue;
+            if (i == 0) {
+                continue;
+            }
             String[] rows = report.get(i).split(",");
             boolean isExpense = Boolean.parseBoolean(rows[1].toLowerCase());
             double sum = Double.parseDouble(rows[2]) * Double.parseDouble(rows[3]);
