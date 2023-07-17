@@ -1,0 +1,14 @@
+item_name,is_expense,quantity,sum_of_one
+Утюг,FALSE,12,30
+Фен,FALSE,20,15
+Машина,TRUE,1,5000
+Велосипед,FALSE,4,250
+Диван,FALSE,2,400
+Стул,FALSE,10,20
+Стол,FALSE,5,100
+Шкаф,FALSE,3,150
+Кровать,FALSE,2,200
+Телевизор,TRUE,2,300
+Компьютер,FALSE,3,400
+Планшет,FALSE,5,200
+Монитор,FALSE,4,150
